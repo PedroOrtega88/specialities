@@ -3,9 +3,28 @@ const app = express();
 
 // Conjunto de datos de usuarios
 const users = [
-    { id: 1, name: 'Usuario1', age: 25, specialty: 'marketing' },
-    { id: 2, name: 'Usuario2', age: 30, specialty: 'developers' },
-    // Otros usuarios...
+    { id: 1, name: 'Antonio', age: 30, specialty: 'marketing' },
+    { id: 2, name: 'LOla', age: 30, specialty: 'developers' },
+    { id: 1, name: 'Paco', age: 20, specialty: 'marketing' },
+    { id: 2, name: 'Marta', age: 22, specialty: 'developers' },
+    { id: 1, name: 'Andrea', age: 40, specialty: 'marketing' },
+    { id: 2, name: 'Jacinto', age: 46, specialty: 'developers' },
+    { id: 1, name: 'Roberto', age: 20, specialty: 'marketing' },
+    { id: 2, name: 'Olga', age: 58, specialty: 'developers' },
+    { id: 1, name: 'Andres', age: 30, specialty: 'marketing' },
+    { id: 2, name: 'Ricardo', age: 30, specialty: 'developers' },
+    { id: 1, name: 'Elena', age: 20, specialty: 'marketing' },
+    { id: 2, name: 'Maria', age: 22, specialty: 'developers' },
+    { id: 1, name: 'Ruben', age: 40, specialty: 'marketing' },
+    { id: 2, name: 'Pepe', age: 46, specialty: 'developers' },
+    { id: 1, name: 'Pilar', age: 20, specialty: 'marketing' },
+    { id: 2, name: 'Lucia', age: 58, specialty: 'cibersecurity' },
+    { id: 2, name: 'Inma', age: 22, specialty: 'developers' },
+    { id: 1, name: 'Rosa', age: 40, specialty: 'marketing' },
+    { id: 2, name: 'Marcos', age: 46, specialty: 'developers' },
+    { id: 1, name: 'Lucas', age: 20, specialty: 'marketing' },
+    { id: 2, name: 'Jose', age: 44, specialty: 'cibersecurity' },
+    
 ];
 
 // Función para filtrar usuarios por especialidad
@@ -14,24 +33,27 @@ function getUsersBySpecialty(specialty) {
 }
 // Función para generar la página HTML
 function generateHTMLPage(title, count, users) {
-    const userDetails = users.map(user => `<p>${user.name}, ${user.age} years old</p>`).join('');
+    const userDetails = users.map(user => `<p>${user.name}, ${user.age}, ${user.specialty} years old</p>`).join('');
     return `
         <h1>${title}</h1>
+        <h5>${specialty}</h5>
         <p>${count} personas</p>
         ${userDetails}
         <a href="/">Home</a>
+
+        
     `;
 }
 
 // Ruta principal
 app.get('/', (req, res) => {
-    const navigation = `<a href="/marketing">Marketing</a> | <a href="/developers">Developers</a>`;
+    const navigation = `<a href="/marketing">Marketing</a> | <a href="/developers">Developers</a> | <a href="/cibersecurity">Cibersecurity</a> | <a href="/sales">Sales</a>`;
     res.send(`<h1>Home</h1>${navigation}`);
 });
 
 // Rutas por especialidad
 app.get('/:specialty', (req, res) => {
-    const specialty = req.params.specialty.toLowerCase();
+    const specialty = req.params.specialty;
     const filteredUsers = getUsersBySpecialty(specialty);
 
     if (filteredUsers.length === 0) {
