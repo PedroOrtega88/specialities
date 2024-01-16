@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-// Conjunto de datos de usuarios
+// datos de usuarios
 const users = [
     { id: 1, name: 'Antonio', age: 30, specialty: 'marketing' },
     { id: 2, name: 'LOla', age: 30, specialty: 'developers' },
@@ -27,11 +27,10 @@ const users = [
     
 ];
 
-// Función para filtrar usuarios por especialidad
 function getUsersBySpecialty(specialty) {
     return users.filter(user => user.specialty === specialty);
 }
-// Función para generar la página HTML
+//generar HTML
 function generateHTMLPage(title, count, users) {
     const userDetails = users.map(user => `<p>${user.name}, ${user.age}, ${user.specialty} years old</p>`).join('');
     return `
@@ -66,12 +65,12 @@ app.get('/:specialty', (req, res) => {
     }
 });
 
-// Manejo de errores 404 para rutas no definidas
+// errores 404 
 app.use((req, res) => {
     res.status(404).send('<h1>404 Not Found</h1>');
 });
 
-// Configuración del servidor
+//  servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
